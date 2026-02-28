@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Patrick Hourihan">
+
+<title>Untitled</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="README_files/libs/clipboard/clipboard.min.js"></script>
+<script src="README_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="README_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="README_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="README_files/libs/quarto-html/popper.min.js"></script>
+<script src="README_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="README_files/libs/quarto-html/anchor.min.js"></script>
+<link href="README_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="README_files/libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="README_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="README_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="README_files/libs/bootstrap/bootstrap-9e3ffae467580fdb927a41352e75a2e0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body class="fullcontent quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Untitled</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Patrick Hourihan </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Overview:</p>
+<p>After watching the superbowl this year, I had a few takeaways. First, as a Patriots fan, this is going to be a sad offseason. Second, the commercials featured a lot of AI content. These initial impressions of the superbowl commercials ignited a deeper curiosity, which is the motivation for my project. This project analyzes recent technology-related news articles to understand how often tech related news has the words “AI”.</p>
+<p>Using data collected from the source NewsAPI, this project uses a small data pipeline that retrieves article data, cleans, and visualizes it for the audience. The contents produced contain AI usage in recent publications online.</p>
+<p>Problem Framing: This project focuses on three main areas: How frequently is technology news published over the past few weeks? How often does the words artificial intelligence appear in technology news headlines Which news sources produce the most</p>
+<p>Data Preparation:</p>
+<p>Collected from NewsAPI, which returns news article information in a raw JSON. Only the fields needed for the analysis were kept. Each article was reduced to its source, title, publication time, and author. I wanted to keep the dataset relevant to my project prompt. Next, the publication time was cleaned by converting it from a text string into a data and time format. By doing this, I could group articles by day or month and compare how often technology news was published over time. Finally, article tiles were examined for the “AI”.</p>
+<div id="f985b781" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>api_key <span class="op">=</span> <span class="st">"2561a12ad67349d9ad09f32243966cc2"</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>topic <span class="op">=</span> <span class="st">"technology"</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>url<span class="op">=</span><span class="ss">f"https://newsapi.org/v2/everything?q=</span><span class="sc">{</span>topic<span class="sc">}</span><span class="ss">&amp;apiKey=</span><span class="sc">{</span>api_key<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> requests.get(url)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response.text)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> response.json()</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> []</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> item <span class="kw">in</span> data[<span class="st">"articles"</span>]:</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    rows.append({</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>        <span class="st">"source"</span>: item[<span class="st">"source"</span>][<span class="st">"name"</span>],</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>        <span class="st">"title"</span>: item[<span class="st">"title"</span>],</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>        <span class="st">"author"</span>: item[<span class="st">"author"</span>],</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>        <span class="st">"time published"</span>: item[<span class="st">"publishedAt"</span>]</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(rows)</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{"status":"ok","totalResults":44013,"articles":[{"source":{"id":"wired","name":"Wired"},"author":"Paresh Dave","title":"Leading US Research Lab Appears to Be Squeezing Out Foreign Scientists","description":"House Democrats are demanding answers from the National Institute of Standards and Technology and urging it to halt rumored changes they say could undermine its mission.","url":"https://www.wired.com/story/leading-us-research-lab-appears-to-be-squeezing-out-foreign-scientists/","urlToImage":"https://media.wired.com/photos/699618081aa18f46c8e47c62/191:100/w_1280,c_limit/Lawmakers-Press-NIST-Business-153842014.jpg","publishedAt":"2026-02-20T10:00:00Z","content":"One of the US governments top scientific research labs is taking steps that could drive away foreign scientists, a shift lawmakers and sources tell WIRED could cost the country valuable expertise and… [+3893 chars]"},{"source":{"id":null,"name":"Gizmodo.com"},"author":"Matt Novak","title":"Why Cops Frequently Got Caught Planting Drugs in 2017","description":"Look. All technology comes with a learning curve.","url":"https://gizmodo.com/cops-planting-drugs-2010s-body-cameras-2000718559","urlToImage":"https://gizmodo.com/app/uploads/2026/02/la-bodycam-1200x675.jpg","publishedAt":"2026-02-05T21:10:32Z","content":"In the mid-2010s, police body cameras started to become mainstream in the U.S., with almost half of police departments adopting them by 2016. But the technology came with a steep learning curve for t… [+8149 chars]"},{"source":{"id":"wired","name":"Wired"},"author":"Alessio Caprodossi","title":"The Shoes and Brooms Transforming Curling at the 2026 Winter Olympics","description":"Halfway between chess and bocce, curling is experiencing an evolution thanks to technology. From brooms to stones to footwear, here’s everything you need to know about the game’s gadgets.","url":"https://www.wired.com/story/the-shoes-and-brooms-transforming-curling-at-the-2026-winter-olympics/","urlToImage":"https://media.wired.com/photos/69824a425ca72a25a7df77d5/191:100/w_1280,c_limit/olympics_curling.jpg","publishedAt":"2026-02-08T12:00:00Z","content":"The Winter Olympic Games have begun, and once again the sport of curling is set to draw in scores of new converts.\r\nAlthough dominated by Sweden, Canada, Switzerland, and Scotland, many eyes during t… [+2686 chars]"},{"source":{"id":"wired","name":"Wired"},"author":"Fernanda González","title":"How Mexico's ‘CJNG’ Drug Cartel Embraced AI, Drones, and Social Media","description":"Drug kingpin Nemesio “El Mencho” Oseguera Cervantes may be dead, but the Jalisco cartel he ran for years will likely outlive him—thanks, in part, to the criminal group’s embrace of technology.","url":"https://www.wired.com/story/how-mexicos-cjng-drug-cartel-embraced-ai-drones-and-social-media/","urlToImage":"https://media.wired.com/photos/699dc8a6084ce041e40435b1/191:100/w_1280,c_limit/carteljal.jpg","publishedAt":"2026-02-25T09:30:00Z","content":"El Mencho is dead.\r\nThis weekend, Mexican Army Special Forces killed Nemesio Rubén El Mencho Oseguera Cervantes, the head of the powerful Jalisco New Generation Cartel (CJNG) in Tapalpa, Jalisco, Mex… [+3982 chars]"},{"source":{"id":null,"name":"Gizmodo.com"},"author":"Ece Yildirim","title":"Palantir Touts $2 Billion in Revenue from Aiding Trump Administration’s ‘Unusual’ Operations","description":"Whether the efforts targeted immigrants or transgender people, Palantir was there to supply the technology in 2025.","url":"https://gizmodo.com/palantir-touts-2-billion-in-revenue-from-aiding-trump-administrations-unusual-operations-2000717022","urlToImage":"https://gizmodo.com/app/uploads/2025/10/gizmodo-social-1200x675-1.jpg","publishedAt":"2026-02-03T01:23:13Z","content":"Palantir earned a record $1.855 billion in revenue from the American government in 2025, the company said in an earnings report that exceeded market expectations.\r\n“We also did this while supporting,… [+4315 chars]"},{"source":{"id":null,"name":"BBC News"},"author":null,"title":"Child abuse increasing and more complex to police, crime agency says","description":"Police cannot tackle the issue alone, the NCA says, and technology companies must do more.","url":"https://www.bbc.com/news/articles/c70nep7p9j6o","urlToImage":"https://ichef.bbci.co.uk/news/1024/branded_news/0df4/live/e2f7cfa0-0c7e-11f1-9972-d3f265c101c6.jpg","publishedAt":"2026-02-18T09:15:58Z","content":"\"On a daily basis, officers at the NCA and across policing are assessing some of the most obscene child abuse imaginable. And this is not hidden in the dark web it's being shared on social media and … [+115 chars]"},{"source":{"id":null,"name":"BBC News"},"author":null,"title":"Ocado to axe 1,000 jobs in cost-cutting drive","description":"The technology and online grocery group is cutting about 5% of its global workforce, with two-thirds of the losses in the UK.","url":"https://www.bbc.com/news/articles/cn5gqpz0rk6o","urlToImage":"https://ichef.bbci.co.uk/news/1024/branded_news/2e80/live/0d70e3c0-12ec-11f1-8aab-5db5bc9cf939.jpg","publishedAt":"2026-02-26T08:19:17Z","content":"Ocado employs about 20,000 people worldwide, with the vast majority in the UK. About two-thirds of the job cuts will be in the UK, with most coming at its headquarters in Hatfield, Hertfordshire."},{"source":{"id":"the-verge","name":"The Verge"},"author":"Jennifer Pattison Tuohy","title":"Ring cancels its partnership with Flock Safety after surveillance backlash","description":"Following intense backlash to its partnership with Flock Safety, a surveillance technology company that works with law enforcement agencies, Ring has announced it is canceling the integration. In a statement published on Ring's blog and provided to The Verge …","url":"https://www.theverge.com/news/878447/ring-flock-partnership-canceled","urlToImage":"https://platform.theverge.com/wp-content/uploads/sites/2/2026/02/STKS525_MASS_SURVEILLANCE.jpg?quality=90&amp;strip=all&amp;crop=0%2C10.732984293194%2C100%2C78.534031413613&amp;w=1200","publishedAt":"2026-02-12T23:06:02Z","content":"&lt;ul&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;/ul&gt;\r\nAfter weeks of mounting pressure and a questionable Super Bowl ad, the Amazon-owned company has walked back its plan to integrate with the controversial surveill… [+6888 chars]"},{"source":{"id":"the-verge","name":"The Verge"},"author":"Jay Peters","title":"Apple’s Podcasts app will let you ‘seamlessly’ switch between audio and video shows","description":"Apple is upgrading its Podcasts app to let users \"seamlessly\" swap between audio and video podcasts using its HTTP Live Streaming (HLS) technology. While listening to a show, users will be able to switch to a horizontal video version of the podcast and downlo…","url":"https://www.theverge.com/tech/879749/apple-podcasts-video-swap-hls-live-streaming","urlToImage":"https://platform.theverge.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/23986636/acastro_STK461_03.jpg?quality=90&amp;strip=all&amp;crop=0%2C10.732984293194%2C100%2C78.534031413613&amp;w=1200","publishedAt":"2026-02-16T19:14:58Z","content":"&lt;ul&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;/ul&gt;\r\nA new way to watch video podcasts that isnt just hopping over to YouTube.\r\nA new way to watch video podcasts that isnt just hopping over to YouTube.\r\nby\r\nJay Pet… [+2151 chars]"},{"source":{"id":"the-verge","name":"The Verge"},"author":"Allison Johnson","title":"I’m super impressed with the Galaxy S26 Ultra’s new Privacy Display","description":"Maybe it's a reflection of just how slow hardware innovation has been, but the Galaxy S26 Ultra's new Privacy Display, which limits the screen's viewing angle to keep any would-be peepers away, left me totally impressed. It's not a brand-new technology - we'v…","url":"https://www.theverge.com/tech/884337/samsung-galaxy-s26-ultra-privacy-display-price","urlToImage":"https://platform.theverge.com/wp-content/uploads/sites/2/2026/02/268373_Samsung_Galaxy_Unpacked_Feb_2026_AJohnson_0001.jpg?quality=90&amp;strip=all&amp;crop=0%2C10.723165084465%2C100%2C78.55366983107&amp;w=1200","publishedAt":"2026-02-25T17:51:05Z","content":"&lt;ul&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;/ul&gt;\r\nNew hardware features? At a time like this?\r\nNew hardware features? At a time like this?\r\nby\r\nAllison JohnsonClose\r\nPosts from this author will be added to your … [+6396 chars]"},{"source":{"id":"the-verge","name":"The Verge"},"author":"Stevie Bonifield","title":"Peloton lays off 11 percent of its staff just a few months after launching its AI hardware","description":"Peloton said on Friday that it's cutting around 11 percent of its staff, mostly impacting \"engineers working on technology and enterprise-related efforts,\" reports Bloomberg. Last August, Peloton laid off six percent of its workforce and told investors it wou…","url":"https://www.theverge.com/gadgets/871422/peloton-layoffs-cost-cutting-2026","urlToImage":"https://platform.theverge.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/24007928/acastro_STK119_Peleton_02.jpg?quality=90&amp;strip=all&amp;crop=0%2C10.732984293194%2C100%2C78.534031413613&amp;w=1200","publishedAt":"2026-01-30T23:53:55Z","content":"&lt;ul&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;/ul&gt;\r\nThe latest round of layoffs at the fitness brand mostly affected members of its engineering team, according to Bloomberg.\r\nThe latest round of layoffs at the fit… [+2294 chars]"},{"source":{"id":"the-verge","name":"The Verge"},"author":"Tina Nguyen","title":"The crypto bill is falling apart in Congress","description":"Hello and welcome to Regulator, the Verge newsletter about the technology politics happening in our nation's capital. I hope our snowstorm-affected readers are safe, warm, and haven't reenacted The Shining at home yet. Do you know what prevents that? Subscrib…","url":"https://www.theverge.com/column/868941/clarity-act-congress-shutdown","urlToImage":"https://platform.theverge.com/wp-content/uploads/sites/2/2026/01/gettyimages-2197125872.jpg?quality=90&amp;strip=all&amp;crop=0%2C10.737892056687%2C100%2C78.524215886627&amp;w=1200","publishedAt":"2026-01-28T01:09:33Z","content":"&lt;ul&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;/ul&gt;\r\nThe crypto bill is falling apart in Congress\r\nWhat was supposed to be a bipartisan foundation for cryptocurrency trading is quickly crumbling under hyperpartisan… [+19302 chars]"},{"source":{"id":"the-verge","name":"The Verge"},"author":"Richard Lawler","title":"Apple’s second biggest acquisition ever is an AI company that listens to ‘silent speech’","description":"Apple's biggest acquisition ever is still its $3 billion Beats buy in 2014, but now the second biggest deal is bringing in Q.ai, a four-year-old AI audio startup. Apple did not disclose the terms, but Financial Times reports that Apple is spending $2 billion …","url":"https://www.theverge.com/news/870353/apple-q-ai-acquisition-silent-speech","urlToImage":"https://platform.theverge.com/wp-content/uploads/sites/2/2025/03/STK071_ACastro_apple_0003.jpg?quality=90&amp;strip=all&amp;crop=0%2C10.732984293194%2C100%2C78.534031413613&amp;w=1200","publishedAt":"2026-01-29T19:22:27Z","content":"&lt;ul&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;/ul&gt;\r\nFT reports Apple is paying $2 billion for Q.ai, an audio startup that uses facial expressions to understand you without a word.\r\nFT reports Apple is paying $2 bi… [+2706 chars]"},{"source":{"id":"the-verge","name":"The Verge"},"author":"Andrew Webster","title":"Half of developers think gen AI is bad for the gaming industry","description":"While generative AI is being adopted at various levels of game development, a new survey suggests that developers increasingly think the technology is bad for the industry. According to the most recent survey from the Game Developers Conference, 52 percent of…","url":"https://www.theverge.com/entertainment/869386/ai-game-development-gdc-survey","urlToImage":"https://platform.theverge.com/wp-content/uploads/sites/2/2025/08/STK465_VIDEO_GAMES_EMULATOR__CVirginia_A.jpg?quality=90&amp;strip=all&amp;crop=0%2C10.732984293194%2C100%2C78.534031413613&amp;w=1200","publishedAt":"2026-01-28T20:35:29Z","content":"&lt;ul&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;/ul&gt;\r\nA new survey from the Game Developers Conference reveals how many developers feel about the technology.\r\nA new survey from the Game Developers Conference reveals… [+4167 chars]"},{"source":{"id":"the-verge","name":"The Verge"},"author":"David Pierce","title":"Millions of books died so Claude could live","description":"When ChatGPT launched, in November of 2022, it started a race that almost immediately consumed the tech industry. OpenAI didn't invent the concept of AI, but most of the state-of-the-art technology was confined to research labs at companies and institutions a…","url":"https://www.theverge.com/podcast/872998/anthropic-claude-books-netflix-theaters-vergecast","urlToImage":"https://platform.theverge.com/wp-content/uploads/sites/2/2026/02/VRG_VST_020326_Site.jpg?quality=90&amp;strip=all&amp;crop=0%2C10.732984293194%2C100%2C78.534031413613&amp;w=1200","publishedAt":"2026-02-03T15:19:28Z","content":"&lt;ul&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;/ul&gt;\r\nOn The Vergecast: data-hungry AI models, Netflix movie theaters, and smart buttons.\r\nOn The Vergecast: data-hungry AI models, Netflix movie theaters, and smart b… [+3923 chars]"},{"source":{"id":null,"name":"Gizmodo.com"},"author":"James Pero","title":"Sony’s Hawk-Eye Cameras Still Aren’t Giving Football Fans the One Thing They Want","description":"Sony's Hawk-Eye tech is an impressive feat of camera technology that changed the NFL this year, but there's still one thing fans and football commentators are begging for.","url":"https://gizmodo.com/sonys-hawk-eye-cameras-still-arent-giving-football-fans-the-one-thing-they-want-2000717879","urlToImage":"https://gizmodo.com/app/uploads/2026/02/super-bowl-camera-1200x675.jpg","publishedAt":"2026-02-08T15:00:26Z","content":"When Super Bowl LX rolls around this year, all eyes will be on the NFL. That includes, on average, a gargantuan audience of 120 million human viewers from across the U.S. (around one-third of the cou… [+10585 chars]"},{"source":{"id":null,"name":"Blog.google"},"author":"Sundar PichaiCEO","title":"“No technology has me dreaming bigger than AI”","description":"a stylized design resembling the Ashoka Chakra with colorful network lines and text reading \"भारत 2026 INDIA.\" A vertical line separates it from the Google logo on the right, all set against a light blue gradient background with a faint grid pattern.","url":"https://blog.google/company-news/inside-google/message-ceo/sundar-pichai-ai-impact-summit-2026/","urlToImage":"https://storage.googleapis.com/gweb-uniblog-publish-prod/images/AI-Google_2.width-1300.png","publishedAt":"2026-02-19T04:30:00Z","content":"Editors note:Today, Google CEO Sundar Pichai addressed world leaders gathered at theAI Impact Summit in New Delhi, India. What follows is a transcript of the remarks, as prepared for delivery.\r\nThank… [+5974 chars]"},{"source":{"id":null,"name":"Harvard Business Review"},"author":"Manish Sharma, Lan Guan, H. James Wilson","title":"Design Processes to Evolve with Emerging Technology","description":"How industry leaders like BMW, Unilever, and Waymo are embracing real-time visibility, digital twins, and agentic AI.","url":"https://hbr.org/2026/01/design-processes-to-evolve-with-emerging-technology","urlToImage":"https://hbr.org/resources/images/article_assets/2026/01/Jan26_30_2214494262.jpg","publishedAt":"2026-01-30T13:05:04Z","content":"For decades, businesses have been trapped in a cycle of painful, episodic change, launching massive re-engineering projects and investing in new IT systems, only to find their organizations fundament… [+216 chars]"},{"source":{"id":null,"name":"MacRumors"},"author":"Juli Clover","title":"Apple Releases Safari Technology Preview 238 With Bug Fixes and Performance Improvements","description":"Apple today released a new update for Safari Technology Preview, the experimental browser that was first introduced in March 2016. Apple designed ‌Safari Technology Preview‌ to allow users to test features that are planned for future release versions of the S…","url":"https://www.macrumors.com/2026/02/26/apple-releases-safari-technology-preview-238/","urlToImage":"https://images.macrumors.com/t/gSfA9gdPJTtAYv_7hjK9YByevcM=/2500x/article-new/2024/07/Safari-Technology-Preview-Updated-Feature-1.jpg","publishedAt":"2026-02-26T22:33:00Z","content":"Apple today released a new update for Safari Technology Preview, the experimental browser that was first introduced in March 2016. Apple designed ‌Safari Technology Preview‌ to allow users to test fe… [+1004 chars]"},{"source":{"id":"the-verge","name":"The Verge"},"author":"Andrew Liszewski","title":"ADT just bought the company that invented Wi-Fi motion sensing","description":"ADT, the 150-year-old company best known for home security, has acquired Origin Wireless in a $170 million deal to expand the capabilities of its security and smart home offerings. Origin Wireless developed algorithms that analyze how wireless RF signals boun…","url":"https://www.theverge.com/tech/883661/adt-smart-home-security-origin-wireless-ai-wi-fi-motion-presence-sensing","urlToImage":"https://platform.theverge.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/22472668/510658996.jpg?quality=90&amp;strip=all&amp;crop=0%2C10.575285434933%2C100%2C78.849429130133&amp;w=1200","publishedAt":"2026-02-24T15:20:07Z","content":"&lt;ul&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;/ul&gt;\r\nThe company will use Origin Wireless AI sensing to expand the capabilities of its smart home security products.\r\nThe company will use Origin Wireless AI sensing … [+2928 chars]"},{"source":{"id":null,"name":"MacRumors"},"author":"Juli Clover","title":"Apple Releases Safari Technology Preview 236 With Bug Fixes and Performance Improvements","description":"Apple today released a new update for Safari Technology Preview, the experimental browser that was first introduced in March 2016. Apple designed ‌Safari Technology Preview‌ to allow users to test features that are planned for future release versions of the S…","url":"https://www.macrumors.com/2026/02/02/apple-releases-safari-technology-preview-236/","urlToImage":"https://images.macrumors.com/t/gSfA9gdPJTtAYv_7hjK9YByevcM=/2500x/article-new/2024/07/Safari-Technology-Preview-Updated-Feature-1.jpg","publishedAt":"2026-02-03T00:11:07Z","content":"Apple today released a new update for Safari Technology Preview, the experimental browser that was first introduced in March 2016. Apple designed ‌Safari Technology Preview‌ to allow users to test fe… [+954 chars]"},{"source":{"id":"business-insider","name":"Business Insider"},"author":"Alice Tecotzky","title":"JPMorgan will spend almost $20 billion on technology this year","description":"JPMorgan is boosting its tech budget by$2 billion in 2026, focusing on AI projects.","url":"https://www.businessinsider.com/jpmorgan-tech-budget-ai-20-billion-jamie-dimon-2026-2","urlToImage":"https://i.insider.com/699ce38d156648bc16a8c346?width=800&amp;format=jpeg","publishedAt":"2026-02-24T00:04:03Z","content":"Dimon said tech ROI is uniquely hard to measure.Eduardo Munoz/Reuters\r\n&lt;ul&gt;&lt;li&gt;JPMorgan plans to boost its tech budget by around $2 billion in 2026, to $19.8 billion.&lt;/li&gt;&lt;li&gt;Most of the increase com… [+2977 chars]"},{"source":{"id":null,"name":"Yahoo Entertainment"},"author":null,"title":"The Zacks Analyst Blog Highlights Micron Technology, MongoDB, Amphenol, Ciena and Seagate Technology","description":null,"url":"https://consent.yahoo.com/v2/collectConsent?sessionId=1_cc-session_d5c28999-6312-4cc7-9371-d584d40cf0aa","urlToImage":null,"publishedAt":"2026-02-09T11:09:00Z","content":"If you click 'Accept all', we and our partners, including 246 who are part of the IAB Transparency &amp;amp; Consent Framework, will also store and / or access information on a device (in other words, us… [+1046 chars]"},{"source":{"id":null,"name":"MacRumors"},"author":"Juli Clover","title":"Apple Releases Safari Technology Preview 237 With Bug Fixes and Performance Improvements","description":"Apple today released a new update for Safari Technology Preview, the experimental browser that was first introduced in March 2016. Apple designed ‌Safari Technology Preview‌ to allow users to test features that are planned for future release versions of the S…","url":"https://www.macrumors.com/2026/02/12/apple-releases-safari-technology-preview-237/","urlToImage":"https://images.macrumors.com/t/gSfA9gdPJTtAYv_7hjK9YByevcM=/2500x/article-new/2024/07/Safari-Technology-Preview-Updated-Feature-1.jpg","publishedAt":"2026-02-12T18:21:13Z","content":"Apple today released a new update for Safari Technology Preview, the experimental browser that was first introduced in March 2016. Apple designed ‌Safari Technology Preview‌ to allow users to test fe… [+1014 chars]"},{"source":{"id":null,"name":"CNET"},"author":"Mark Knapp","title":"TMR vs. Hall Effect Controllers: Battle of the Magnetic Sensing Tech","description":"The magic of magnets tucked into your joysticks can put an end to drift. But which technology is superior?","url":"https://www.cnet.com/tech/gaming/tmr-vs-hall-effect-joysticks-battle-of-the-magnetic-sensing-tech/","urlToImage":"https://www.cnet.com/a/img/resize/98e694182f00c6794c8ec0bacd9c59cd59ff02f7/hub/2026/01/30/83ba92c4-0109-46ab-9730-cf7515047815/img20260120133718.jpg?auto=webp&amp;fit=crop&amp;height=675&amp;width=1200","publishedAt":"2026-02-18T12:01:01Z","content":"Competitive gamers look for every advantage they can get, and that drive has spawned some of the zaniest gaming peripherals under the sun. There are plenty of hardware components that actually offer … [+6091 chars]"},{"source":{"id":"business-insider","name":"Business Insider"},"author":"Roya Shahidi","title":"AI anxiety is spiking. The internet is pining for the simpler days of iPods, digital cameras, and retro phones.","description":"Gen Z and millennials are finding comfort in analog technology as AI disillusionment grows.","url":"https://www.businessinsider.com/millennials-gen-z-internet-simpler-times-old-technology-ai-rejection-2026-2","urlToImage":"https://i.insider.com/6995df04f8731049f3af500f?width=1200&amp;format=jpeg","publishedAt":"2026-02-19T11:47:08Z","content":"De-digitalizing your life is the new status symbol in 2026. Mat Szwajkos/Getty Images\r\n&lt;ul&gt;&lt;li&gt;Nostalgia for obsolete technology is trending right now.&lt;/li&gt;&lt;li&gt;Gen Z and millennials are rejecting new… [+4259 chars]"},{"source":{"id":"the-verge","name":"The Verge"},"author":"Andrew J. Hawkins","title":"Self-driving truck startup Waabi is teaming up with Uber on robotaxis","description":"Waabi, the Toronto-based autonomous trucking startup, is expanding its portfolio to include robotaxis. And it's bringing Uber along for the ride. Raquel Urtasun, the former chief scientist at Uber's now defunct Advanced Technologies Group, founded Waabi in 20…","url":"https://www.theverge.com/news/868535/waabi-robotaxi-uber-fundraising-self-driving-truck","urlToImage":"https://platform.theverge.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/25495300/Waabi_Truck__5_.jpg?quality=90&amp;strip=all&amp;crop=0%2C15.095986038394%2C100%2C69.808027923211&amp;w=1200","publishedAt":"2026-01-27T20:25:26Z","content":"&lt;ul&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;/ul&gt;\r\nThe Toronto-based company announced $1 billion in new funds, including $750 million tied to its deal to deploy 25,000 robotaxis with Uber.\r\nThe Toronto-based com… [+5760 chars]"},{"source":{"id":null,"name":"Gizmodo.com"},"author":"Gayoung Lee","title":"Microsoft’s Glass Chip Holds Terabytes of Data for 10,000 Years","description":"\"This will change the way we think about keeping data and archival preservation.\"","url":"https://gizmodo.com/microsofts-glass-chip-holds-terabytes-of-data-for-10000-years-2000723455","urlToImage":"https://gizmodo.com/app/uploads/2026/02/microsoft-silica-beauty-shot-e1771435401965-1200x675.jpg","publishedAt":"2026-02-18T19:55:02Z","content":"Our knowledge of the past comes from stone tablets and old parchment. But thousands of years from now, our descendants may learn of our lives from a thin slice of glass carrying an impressive load of… [+6079 chars]"},{"source":{"id":null,"name":"BBC News"},"author":null,"title":"Stroke survivors trial new at-home tech: 'It's given me my freedom back'","description":"Participants in the NHS 'Triceps' trial wear a device in their ear which emits electrical pulses while they do rehab.","url":"https://www.bbc.com/news/articles/cn87gj9k301o","urlToImage":"https://ichef.bbci.co.uk/news/1024/branded_news/9107/live/ed515dc0-08ed-11f1-94dc-adc7436c6c75.jpg","publishedAt":"2026-02-14T01:35:47Z","content":"\"The team are doing brain imaging and taking blood tests because we know that some stroke patients really respond well to this technology while some don't,\" said Maeva May, the charity's associate di… [+28 chars]"},{"source":{"id":"the-verge","name":"The Verge"},"author":"Nilay Patel","title":"Siemens CEO Roland Busch’s mission to automate everything","description":"Today, I’m talking with Roland Busch, who is the CEO of Siemens. Siemens is one of those absolutely giant, extremely important, but fairly opaque companies we love to dig into on Decoder. At a very basic, reductive level, Siemens makes the hardware and softwa…","url":"https://www.theverge.com/podcast/875233/siemens-ceo-roland-busch-ai-automation-digital-twins-nato-tariffs","urlToImage":"https://platform.theverge.com/wp-content/uploads/sites/2/2026/02/DCD-Roland-Busch.png?quality=90&amp;strip=all&amp;crop=0%2C10.711631919237%2C100%2C78.576736161526&amp;w=1200","publishedAt":"2026-02-09T15:00:48Z","content":"&lt;ul&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;/ul&gt;\r\nRoland Busch on AI-powered factories, tariffs in the Trump era, trade, and the future of NATO.\r\nby\r\nNilay PatelClose\r\nPosts from this author will be added to you… [+56478 chars]"},{"source":{"id":"business-insider","name":"Business Insider"},"author":"Lakshmi Varanasi","title":"OpenClaw creator makes a case for 'specialized intelligence' over superintelligence","description":"OpenClaw creator Peter Steinberger said specialized AI, not AGI or LLMs, is a better future for the technology.","url":"https://www.businessinsider.com/openclaw-peter-steinberger-specialized-ai-agi-superintelligence-moltbook-2026-2","urlToImage":"https://i.insider.com/6989035fd3c7faef0ecddcdf?width=1200&amp;format=jpeg","publishedAt":"2026-02-09T10:03:01Z","content":"Peter Steinberger, the creator of OpenClaw, thinks AI is better off specialized.Nikolas Kokovlis/NurPhoto via Getty Images\r\n&lt;ul&gt;&lt;li&gt;OpenClaw creator Peter Steinberger isn't a fan of AGI or superintel… [+3248 chars]"},{"source":{"id":"business-insider","name":"Business Insider"},"author":"Lee Chong Ming","title":"Drunken boxing and backflips: China put on a robot kung fu display that shows how fast its robotics industry is growing","description":"China's humanoid robots performed kung fu on national TV, stunning viewers with how quickly the technology has advanced.","url":"https://www.businessinsider.com/china-kung-fu-humanoid-robots-performance-spring-festival-gala-unitree-2026-2","urlToImage":"https://i.insider.com/699687f2f8731049f3af5f21?width=1200&amp;format=jpeg","publishedAt":"2026-02-19T05:21:52Z","content":"From drunken boxing to backflips, China's humanoid robots showed how quickly the industry is scaling.Ying Tang/NurPhoto via Getty Images\r\n&lt;ul&gt;&lt;li&gt;Chinese humanoid robots performed boxing and swung sw… [+3467 chars]"},{"source":{"id":null,"name":"CNET"},"author":"Corin Cesaric","title":"The Best of KBIS 2026: Hidden Cooktops, Ice Makers and More Industry Firsts","description":"The Kitchen and Bath Industry Show showcases breakthrough technology in the home industry. CNET's David Watsky is there in person to see it all.","url":"https://www.cnet.com/home/kitchen-and-household/the-best-of-kbis-2026/","urlToImage":"https://www.cnet.com/a/img/resize/9f129d33c628add6d051cb1b160f193f83151131/hub/2026/02/17/d97fdcf4-dcd9-415e-b2d5-201b37c3f6d9/screenshot-2026-02-17-at-9-56-49am.png?auto=webp&amp;fit=crop&amp;height=675&amp;width=1200","publishedAt":"2026-02-19T15:07:00Z","content":"The Kitchen and Bath Industry Show&nbsp;is in full swing in Orlando, Florida.&nbsp;David Watsky, our home and kitchen expert, is on the ground to see everything the show has to offer.&nbsp;\r\nBelow are the items tha… [+3452 chars]"},{"source":{"id":"business-insider","name":"Business Insider"},"author":"htan@insider.com (Huileng Tan)","title":"AI may unleash a 'revenge of the dinosaurs' as corporate giants boost profits, hedge fund exec says","description":"AI's next phase will shift from Nvidia and cloud leaders to large incumbent companies adopting the technology to boost profits and cut costs.","url":"https://www.businessinsider.com/stock-market-ai-bubble-outlook-corporate-profits-tech-lone-pine-2026-2","urlToImage":"https://i.insider.com/698e9070e1ba468a96abfe6f?width=1200&amp;format=jpeg","publishedAt":"2026-02-13T05:04:34Z","content":"Investors are growing jittery about a potential bubble in artificial intelligence stocks, but the real payoff may be just beginning and it could extend well beyond Silicon Valley's usual winners, a $… [+3030 chars]"},{"source":{"id":null,"name":"Yahoo Entertainment"},"author":null,"title":"Space Age Technology Reveals Secrets of Bronze Age Sword","description":null,"url":"https://consent.yahoo.com/v2/collectConsent?sessionId=1_cc-session_2874693c-073a-44cf-85e4-723f68769d1d","urlToImage":null,"publishedAt":"2026-02-18T21:00:00Z","content":"If you click 'Accept all', we and our partners, including 245 who are part of the IAB Transparency &amp;amp; Consent Framework, will also store and / or access information on a device (in other words, us… [+1046 chars]"},{"source":{"id":"the-verge","name":"The Verge"},"author":"Justine Calma","title":"Microsoft wants to rewire data centers to save space","description":"Microsoft wants to design more efficient data centers using materials that allow electricity to flow with zero resistance. If these new materials, called high-temperature superconductors, can make it to market, Microsoft thinks it could be a game changer for …","url":"https://www.theverge.com/science/876083/microsoft-ai-data-center-superconductor","urlToImage":"https://platform.theverge.com/wp-content/uploads/sites/2/2026/02/gettyimages-2243425240.jpg?quality=90&amp;strip=all&amp;crop=0%2C10.737892056687%2C100%2C78.524215886627&amp;w=1200","publishedAt":"2026-02-10T16:01:44Z","content":"&lt;ul&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;/ul&gt;\r\nSuperconducting cables could make for more compact data centers.\r\nSuperconducting cables could make for more compact data centers.\r\nby\r\nJustine CalmaClose\r\nPosts… [+6551 chars]"},{"source":{"id":"the-verge","name":"The Verge"},"author":"Jennifer Pattison Tuohy","title":"Amazon Ring’s Super Bowl ad sparks backlash amid fears of mass surveillance","description":"Ring's new Search Party feature has once again drawn backlash for the company. A 30-second ad that aired during Sunday's Super Bowl showed Ring cameras \"surveilling\" neighborhoods to locate a lost dog. In the current political climate, a prime-time ad celebra…","url":"https://www.theverge.com/tech/876866/ring-search-party-super-bowl-ad-online-backlash","urlToImage":"https://platform.theverge.com/wp-content/uploads/sites/2/2026/02/Screenshot-2026-02-10-at-7.36.46%E2%80%AFPM.png?quality=90&amp;strip=all&amp;crop=0%2C1.1834423207665%2C100%2C97.633115358467&amp;w=1200","publishedAt":"2026-02-11T01:21:07Z","content":"&lt;ul&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;/ul&gt;\r\nA new AI-powered Search Party feature can scan footage from neighborhood cameras to find lost dogs. Critics worry it could be used to search for people.\r\nA new A… [+7246 chars]"},{"source":{"id":"wired","name":"Wired"},"author":"Mila Fiordalisi","title":"The Technologies Changing How You’ll Watch the 2026 Winter Olympic Games","description":"From drones with “first-person” visualization to real-time 360-degree replays and Olympics GPT, get ready to immerse yourself in the Winter Games in Milan and Cortina.","url":"https://www.wired.com/story/the-technologies-changing-how-youll-watch-the-2026-winter-olympic-games/","urlToImage":"https://media.wired.com/photos/698655d97cbb83907b42da12/191:100/w_1280,c_limit/Technologies-Changing-How-Youll-Watch-Winter-Olympic-Games-Gear-2259908698.jpg","publishedAt":"2026-02-07T12:00:00Z","content":"During the 2024 Summer Olympics in Paris, 5G and 4K were the leading technologies available to many viewers. There was some AI, but it was mostly used for athletes benefit. For the 2026 Milano Cortin… [+3413 chars]"},{"source":{"id":"wired","name":"Wired"},"author":"Molly Taft","title":"Big Tech Says Generative AI Will Save the Planet. It Doesn't Offer Much Proof","description":"A new report finds that of 154 specific claims about how AI will benefit the climate, just a quarter cited academic research. A third included no evidence at all.","url":"https://www.wired.com/story/big-tech-says-generative-ai-will-save-the-planet-it-doesnt-offer-much-proof/","urlToImage":"https://media.wired.com/photos/6994a673e3c49810b386ab2d/191:100/w_1280,c_limit/021726_Data-Emissions-False.jpg","publishedAt":"2026-02-18T15:17:31Z","content":"But a lot of these claims, it turns out, have very littleif anyactual proof behind them.\r\nJoshi is the author of a new report, released Monday with support from several environmental organizations, t… [+3370 chars]"},{"source":{"id":null,"name":"BBC News"},"author":null,"title":"Trump says 'it would be great' if US 'didn't have to use' military force on Iran","description":"The US president says he has told Iran it has to do \"two things\" to avoid military action, as the US builds up its forces in the Gulf.","url":"https://www.bbc.com/news/articles/c394ymdpjwvo","urlToImage":"https://ichef.bbci.co.uk/news/1024/branded_news/d6e6/live/1940f870-fd98-11f0-b7e1-afb6d0884c18.jpg","publishedAt":"2026-01-30T06:12:01Z","content":"In response, Araghchi said: \"Iran has always welcomed a mutually beneficial, fair and equitable NUCLEAR DEAL - on equal footing, and free from coercion, threats, and intimidation - which ensures Iran… [+76 chars]"},{"source":{"id":"the-verge","name":"The Verge"},"author":"Emma Roth","title":"El Paso airspace closure was reportedly triggered by the CBP’s use of an anti-drone laser","description":"The hours-long closure of El Paso airspace stemmed from the use of an anti-drone laser deployed by Customs and Border Protection, according to reports from The New York Times and the Associated Press. Sources tell The Times that CBP officials didn't give the …","url":"https://www.theverge.com/policy/878108/el-paso-airspace-closure-cbp-anti-drone-laser","urlToImage":"https://platform.theverge.com/wp-content/uploads/sites/2/2026/02/gettyimages-2253661753.jpg?quality=90&amp;strip=all&amp;crop=0%2C10.732984293194%2C100%2C78.534031413613&amp;w=1200","publishedAt":"2026-02-12T17:02:08Z","content":"&lt;ul&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;/ul&gt;\r\nCBP officials thought they were taking down a drone, but it was actually a party balloon, according to The New York Times.\r\nCBP officials thought they were takin… [+3495 chars]"},{"source":{"id":"business-insider","name":"Business Insider"},"author":"Sinéad Baker","title":"Ukraine's drone war showed the West it needs to view small drones less like prized gear and more like expendable ammo","description":"Western militaries often view new technology as precious and valuable. Ukraine shows that they can't afford to view small drones that way.","url":"https://www.businessinsider.com/ukraine-shows-partners-view-small-drones-disposable-2026-2","urlToImage":"https://i.insider.com/6994674da645d11881896dac?width=1200&amp;format=jpeg","publishedAt":"2026-02-18T14:48:49Z","content":"Ukraine's allies want to learn as much as possible from how it's conducting drone warfare.Wolfgang Schwan/Anadolu via Getty Images\r\n&lt;ul&gt;&lt;li&gt;The war in Ukraine is showing Western militaries that they … [+7270 chars]"},{"source":{"id":"business-insider","name":"Business Insider"},"author":"Eugene Kim","title":"Anthropic pushes Claude into Excel and PowerPoint, escalating AI battle with Microsoft and OpenAI","description":"The startup is trying to transform its Claude AI model from a coding tool into a much broader workplace technology platform.","url":"https://www.businessinsider.com/anthropic-ai-software-claude-microsoft-powerpoint-excel-slack-2026-2","urlToImage":"https://i.insider.com/699cefcbefb52c8bd0deb9e2?width=1200&amp;format=jpeg","publishedAt":"2026-02-24T14:30:01Z","content":"Anthropic CEO Dario Amodei at the World Economic Forum in DavosYves Herman/REUTERS\r\n&lt;ul&gt;&lt;li&gt;Anthropic is embedding AI more deeply in popular work software tools.&lt;/li&gt;&lt;li&gt;Claude AI now integrates with… [+3271 chars]"},{"source":{"id":"wired","name":"Wired"},"author":"Nena Farrell","title":"HigherDose Red Light Hat Review: Scalp Savior (2026)","description":"Turns out, red light isn’t just for your face. HigherDose’s Red Light Hat has given me the best hair and scalp I’ve had in years.","url":"https://www.wired.com/review/higherdose-red-light-hat/","urlToImage":"https://media.wired.com/photos/697c0e23903f3e6cbf882cc6/191:100/w_1280,c_limit/Review-%20HigherDose%20Red%20Light%20Hat.png","publishedAt":"2026-01-30T11:31:00Z","content":"It's similar to how red-light face masks work. These masks are usually worn for about 10 minutes and always have a light wavelength level in the 600-nm range (usually 630 to 660), like the HigherDose… [+2417 chars]"},{"source":{"id":null,"name":"Gizmodo.com"},"author":"Kyle Barr","title":"There’s One, and Only One, Reason To Get Excited for the Samsung Galaxy S26","description":"It's a feature for people who can't stand strangers staring at their phone screens.","url":"https://gizmodo.com/theres-one-and-only-one-reason-to-get-excited-for-the-samsung-galaxy-s26-2000721695","urlToImage":"https://gizmodo.com/app/uploads/2025/01/Samsung-Galaxy-S25-Ultra-SF-03-1200x675.jpg","publishedAt":"2026-02-13T15:54:28Z","content":"When Samsung finally spills the beans on its Galaxy S26 flagship phones on Feb. 25, Android users will likely be left squinting, trying to identify differences between these devices and the previous-… [+3353 chars]"},{"source":{"id":null,"name":"Gizmodo.com"},"author":"Matt Novak","title":"OpenAI President Defends Trump Donations, Refuses to Comment on ICE","description":"Are you just an apolitical defender of AI if you give money to fascists?","url":"https://gizmodo.com/openai-president-defends-trump-donations-refuses-to-comment-on-ice-2000721451","urlToImage":"https://gizmodo.com/app/uploads/2026/02/greg-brockman-jan-2026-1200x675.jpg","publishedAt":"2026-02-12T22:10:41Z","content":"OpenAI cofounder and president Greg Brockman gave millions of dollars to support President Donald Trump in 2025, despite the fact that Trump can’t run for president again. Why? Apparently, Brockman r… [+3382 chars]"},{"source":{"id":null,"name":"Gizmodo.com"},"author":"Mike Pearl","title":"Flock Cameras Have a People-Love-Smashing-Them Problem","description":"People just aren't being very nice to these mass surveillance devices.","url":"https://gizmodo.com/flock-cameras-have-a-people-love-smashing-them-problem-2000725063","urlToImage":"https://gizmodo.com/app/uploads/2026/02/flock-camera-1200x675.jpg","publishedAt":"2026-02-22T10:00:23Z","content":"Flock cameras have become such attractive targets for destruction that some police have become protective of information about where they’re mounted. A local news story Friday in Louisville, Kentucky… [+3566 chars]"},{"source":{"id":"business-insider","name":"Business Insider"},"author":"Pete Syme","title":"Ryanair CEO who argued with Elon Musk over Starlink thinks every airline will have free WiFi within 5 years","description":"\"I think as the WiFi technology improves over the next four or five years, we'll all be offering free WiFi access,\" Ryanair CEO Michael O'Leary said.","url":"https://www.businessinsider.com/ryanair-ceo-says-every-airline-free-wifi-5-years-starlink-2026-1","urlToImage":"https://i.insider.com/6978b5f5e1ba468a96aac075?width=1200&amp;format=jpeg","publishedAt":"2026-01-27T13:38:30Z","content":"Ryanair CEO Michael O'Leary at last Wednesday's press conference.Brian Lawless/PA Images via Getty Images\r\n&lt;ul&gt;&lt;li&gt;Ryanair CEO Michael O'Leary argued with Elon Musk about Starlink last week.&lt;/li&gt;&lt;li&gt;… [+2796 chars]"},{"source":{"id":"business-insider","name":"Business Insider"},"author":"Kelsey Vlamis","title":"The 'Godfather of AI' says this pricey private school is one of the best uses of AI he's seen","description":"Geoffrey Hinton, the \"Godfather of AI,\" highlights AI's role in education at Alpha School as a positive use case of the technology.","url":"https://www.businessinsider.com/godfather-ai-geoffrey-hinton-alpha-school-education-use-case-2026-1","urlToImage":"https://i.insider.com/697acec5e1ba468a96aaec72?width=1200&amp;format=jpeg","publishedAt":"2026-01-29T10:23:01Z","content":"Geoffrey Hinton said the AI-based Alpha School model is better for teachers and students.JONATHAN NACKSTRAND/AFP via Getty Images\r\n&lt;ul&gt;&lt;li&gt;Geoffrey Hinton, the \"Godfather of AI,\" said AI in education… [+2468 chars]"},{"source":{"id":"the-verge","name":"The Verge"},"author":"Emma Roth","title":"Apple just had a record-breaking iPhone quarter","description":"Apple says the iPhone had its \"best-ever\" quarter, with revenue hitting more than $85.3 billion over the past few months. The company announced the news as part of its Q1 2026 earnings report, which also revealed record-breaking revenue of $143.8 billion, up …","url":"https://www.theverge.com/news/870319/apple-iphone-best-revenue-ai-q1-2026","urlToImage":"https://platform.theverge.com/wp-content/uploads/sites/2/2025/09/DSC01706-1.jpg?quality=90&amp;strip=all&amp;crop=0%2C10.740652134574%2C100%2C78.518695730853&amp;w=1200","publishedAt":"2026-01-29T21:54:56Z","content":"&lt;ul&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;/ul&gt;\r\niPhone revenue surged past $85.3 billion despite setbacks in AI.\r\niPhone revenue surged past $85.3 billion despite setbacks in AI.\r\nby\r\nEmma RothClose\r\nPosts fro… [+2773 chars]"},{"source":{"id":null,"name":"Gizmodo.com"},"author":"Zac Estrada","title":"What If the Sensors on Your Car Were Inspecting Potholes for the Government? Honda Found Out","description":"Radars and cameras might be for seeing cars and people now but they can be used to make existing roads better in the first place.","url":"https://gizmodo.com/what-if-the-sensors-on-your-car-were-inspecting-potholes-for-the-government-honda-found-out-2000715973","urlToImage":"https://gizmodo.com/app/uploads/2026/01/Honda-Road-Repair-AI-1200x675.jpg","publishedAt":"2026-02-01T10:00:33Z","content":"Modern cars are already equipped with various cameras and sensors monitoring other vehicles, cyclists and pedestrians to minimize or prevent collisions with them, and theres more of that technology c… [+2829 chars]"},{"source":{"id":null,"name":"Gizmodo.com"},"author":"Bruce Gil","title":"Amazon Laying Off 16,000 as It Increases ‘Ownership’ and Removes ‘Bureaucracy’","description":"A blog post by the company’s head of HR hinted that more layoffs could be on the way.","url":"https://gizmodo.com/amazon-laying-off-16000-as-it-increases-ownership-and-removes-bureaucracy-2000715027","urlToImage":"https://gizmodo.com/app/uploads/2021/03/wtruh4fw0myjiaqe8iyl.jpg","publishedAt":"2026-01-28T16:41:57Z","content":"Amazon announced another round of layoffs Wednesday morning, impacting roughly 16,000 employees, just months after the company cut thousands of corporate jobs last fall.\r\nThe announcement came in a b… [+2895 chars]"},{"source":{"id":null,"name":"Popular Mechanics"},"author":"Elizabeth Rayne","title":"A Mountain Secretly Collapsed in Greenland. And Then the Earth Rang Like a Bell for 9 Straight Days.","description":"NASA technology traced the pulsing back to a massive tsunami.","url":"https://www.popularmechanics.com/science/environment/a70465538/greenland-megatsunami-waves-mystery/","urlToImage":"https://s.yimg.com/ny/api/res/1.2/X6ffPS3hfZjhuq7lrcuLfQ--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD02NzU7Y2Y9d2VicA--/https://media.zenfs.com/en/popular_mechanics_642/5836466a07557d53e73c921931e8a9b3","publishedAt":"2026-02-23T17:26:00Z","content":"\"Hearst Magazines and Yahoo may earn commission or revenue on some items through these links.\"\r\nHeres what youll learn when you read this story:\r\n&lt;ul&gt;&lt;li&gt;Strange signals coming from the Arctic in 202… [+4309 chars]"},{"source":{"id":null,"name":"Gizmodo.com"},"author":"Ece Yildirim","title":"Denver Announces Data Center Moratorium as Opposition Picks Up Steam Around the Country","description":"Many states are considering a moratorium. Will national politicians catch up?","url":"https://gizmodo.com/denver-announces-data-center-moratorium-as-opposition-picks-up-steam-around-the-country-2000726129","urlToImage":"https://gizmodo.com/app/uploads/2026/02/shutterstock_2685684165-1200x675.jpg","publishedAt":"2026-02-25T12:15:25Z","content":"Denver Mayor Mike Johnston announced this week that the city will be imposing a moratorium on the development of new data centers.\r\nIf approved in an upcoming city council ordinance vote, the morator… [+5445 chars]"},{"source":{"id":null,"name":"Gizmodo.com"},"author":"Bruce Gil","title":"Want to Know If Glassholes Are Using Smart Glasses Near You? There’s an App for That","description":"The app called Nearby Glasses scans Bluetooth signals to detect and alert users when the camera-equipped glasses are nearby.","url":"https://gizmodo.com/want-to-know-if-glassholes-are-using-smart-glasses-near-you-theres-an-app-for-that-2000726480","urlToImage":"https://gizmodo.com/app/uploads/2024/09/Screenshot-2024-09-20-095240-e1726840413642.jpg","publishedAt":"2026-02-25T17:10:11Z","content":"As smart glasses become more mainstream, such as Metas Ray-Ban models, its getting harder to tell when someone might be secretly recording video in public.\r\nThats where a new smartphone app called Ne… [+2472 chars]"},{"source":{"id":"business-insider","name":"Business Insider"},"author":"Alice Tecotzky","title":"A Goldman Sachs partner in technology shares the skills young job seekers need in the AI workplace","description":"Bracha Cohen said that computer science majors should learn how to ask good, incisive questions.","url":"https://www.businessinsider.com/goldman-sachs-partner-ai-wealth-management-genz-2026-2","urlToImage":"https://i.insider.com/698f73dea645d1188189550f?width=375&amp;format=jpeg","publishedAt":"2026-02-14T11:06:01Z","content":"whyframestudio/Getty Images\r\n&lt;ul&gt;&lt;li&gt;Bracha Cohen, a partner and engineer, said young talent should focus on how systems work.&lt;/li&gt;&lt;li&gt;She advised computer science majors to learn how to ask good que… [+2593 chars]"},{"source":{"id":null,"name":"Gizmodo.com"},"author":"Tom Hawking","title":"This Robot Hand Pops Off and Crawls. I Hate It So Much.","description":"Like a robotic spider! But somehow worse!","url":"https://gizmodo.com/this-robot-hand-pops-off-and-crawls-i-hate-it-so-much-2000715991","urlToImage":"https://gizmodo.com/app/uploads/2026/01/Robot-hand-1200x675.jpg","publishedAt":"2026-01-30T18:45:13Z","content":"Heres some nightmare fuel from the world of robotics: a robot arm with a six-fingered hand that can detach itself and crawl around on its own.\r\nThe contraption is the invention of a team from the Sch… [+2179 chars]"},{"source":{"id":null,"name":"Gizmodo.com"},"author":"Zac Estrada","title":"Mercedes-Benz Says the 2027 S-Class Gives Passengers a Better Ride Through AI","description":"Updates to the vehicle of the financial district include things you can feel, including heated seat belts.","url":"https://gizmodo.com/mercedes-benz-says-the-2027-s-class-gives-passengers-a-better-ride-through-ai-2000715731","urlToImage":"https://gizmodo.com/app/uploads/2026/01/Mercedes-Benz-S-Class-1200x675.jpg","publishedAt":"2026-01-29T21:55:01Z","content":"Like its luxury counterparts that made a significant electric push at the beginning of the decade, Mercedes-Benz is reexamining its roots as it charts a new zero-emissions route. Well-heeled buyers a… [+4306 chars]"},{"source":{"id":"the-verge","name":"The Verge"},"author":"Lauren Feiner","title":"A powerful tool of resistance is already in your hands","description":"In an eyewitness video analyzed frame by frame by The New York Times, Alex Pretti raises one hand and holds a phone in the other. Federal agents tackle him, and one appears to find and remove a gun holstered on his hip. Then, an agent shoots - and a second fo…","url":"https://www.theverge.com/policy/879273/alex-pretti-ice-cbp-trump-free-speech","urlToImage":"https://platform.theverge.com/wp-content/uploads/sites/2/2026/01/268288_Minneapolis_General_Strike_JCalifano_0297.jpg?quality=90&amp;strip=all&amp;crop=0%2C17.277486910995%2C100%2C65.44502617801&amp;w=1200","publishedAt":"2026-02-13T22:56:08Z","content":"&lt;ul&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;/ul&gt;\r\nBut its also a potent tool of state power.\r\nBut its also a potent tool of state power.\r\nby\r\nLauren FeinerClose\r\nPosts from this author will be added to your dail… [+10851 chars]"},{"source":{"id":"the-next-web","name":"The Next Web"},"author":"Ana-Maria Stanciuc","title":"TechEx Global returns to London with enterprise technology and AI execution","description":"London, TechEx Global 2026, one of Europe’s biggest enterprise technology conferences, brought thousands of technology professionals together at Olympia London on 4 and 5 February. The event went beyond buzzwords, focusing on how emerging technologies, especi…","url":"https://thenextweb.com/news/techex-global-returns-to-london-with-enterprise-technology-and-ai-execution","urlToImage":"https://img-cdn.tnwcdn.com/image/tnw-blurple?filter_last=1&amp;fit=1280%2C640&amp;url=https%3A%2F%2Fcdn0.tnwcdn.com%2Fwp-content%2Fblogs.dir%2F1%2Ffiles%2F2026%2F02%2FTechEx-London.png&amp;signature=1067cbab6ef0385b23085d9f0d53a954","publishedAt":"2026-02-06T08:56:15Z","content":"London, TechEx Global 2026, one of Europes biggest enterprise technology conferences, brought thousands of technology professionals together at Olympia London on 4 and 5 February. The event went beyo… [+2765 chars]"},{"source":{"id":"the-verge","name":"The Verge"},"author":"Charles Pulliam-Moore","title":"An Ark showed me augmented reality’s true artistic potential","description":"A few weeks ago, I locked eyes with Sir Ian McKellen as he told me a story about how I was born, where I grew up, and when I would eventually die. Some of the details were a little off, but others were so unsettlingly on the money that it felt like he really …","url":"https://www.theverge.com/gadgets/875869/an-ark-mixed-reality-simon-stephens-sarah-frankcom-todd-eckert","urlToImage":"https://platform.theverge.com/wp-content/uploads/sites/2/2026/02/anarccast.jpg?quality=90&amp;strip=all&amp;crop=3.6418731689453%2C12.398151460296%2C96.358126831055%2C75.203697079408&amp;w=1200","publishedAt":"2026-02-10T17:23:15Z","content":"&lt;ul&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;/ul&gt;\r\nThe new mixed reality play uses AR glasses to make its story feel uniquely intimate.\r\nThe new mixed reality play uses AR glasses to make its story feel uniquely … [+6290 chars]"},{"source":{"id":null,"name":"MacRumors"},"author":"Joe Rossignol","title":"Apple Just Made Its Second-Biggest Acquisition Ever After Beats","description":"Apple today confirmed to Reuters that it has acquired Q.ai, an Israeli startup that is working on artificial intelligence technology for audio.\n\n\n\n\n\nApple paid close to $2 billion for Q.ai, according to sources cited by the Financial Times. That would make th…","url":"https://www.macrumors.com/2026/01/29/apple-second-biggest-acquisition-ever/","urlToImage":"https://images.macrumors.com/t/yFW3VMvOO_OCLJnNnBNawPXm2zU=/2048x/article-new/2026/01/Apple-Logo-Black.jpeg","publishedAt":"2026-01-29T18:07:34Z","content":"Apple today confirmed to Reuters that it has acquired Q.ai, an Israeli startup that is working on artificial intelligence technology for audio.\r\nApple paid close to $2 billion for Q.ai, according to … [+1198 chars]"},{"source":{"id":null,"name":"Yahoo Entertainment"},"author":"Zacks Equity Research","title":"The Zacks Analyst Blog Highlights NVIDIA, Taiwan Semiconductor, Micron Technology and Super Micro Computer","description":"Taiwan Semiconductor, Micron and Super Micro are outpacing NVIDIA in 2026 as AI-driven data center demand fuels chip and server growth.","url":"https://finance.yahoo.com/news/zacks-analyst-blog-highlights-nvidia-151600066.html","urlToImage":"https://s.yimg.com/os/en/zacks.com/f137593ef3b3f5b2675404f14056fe62","publishedAt":"2026-02-24T15:16:00Z","content":"Chicago, IL – February 24, 2026 – Zacks.com announces the list of stocks featured in the Analyst Blog. Every day the Zacks Equity Research analysts discuss the latest news and events impacting stocks… [+6070 chars]"},{"source":{"id":"wired","name":"Wired"},"author":"Matt Burgess, Andy Greenberg, Lily Hay Newman","title":"Password Managers Share a Hidden Weakness","description":"Plus: The cybersecurity community grapples with Epstein files revelations, the US State Department plans an online anti-censorship “portal” for the world, and more.","url":"https://www.wired.com/story/security-news-this-week-password-managers-share-a-hidden-weakness/","urlToImage":"https://media.wired.com/photos/6998d03f68f921f5e6a08ece/191:100/w_1280,c_limit/sec-pw-managers-2187086214.jpg","publishedAt":"2026-02-21T11:30:00Z","content":"An FBI informant helped run the Incognito dark web market and allegedly approved the sale of fentanyl-laced pills, including those from a dealer linked to a confirmed death, WIRED reported this week.… [+5567 chars]"},{"source":{"id":"wired","name":"Wired"},"author":"Steven Levy","title":"AI Safety Meets the War Machine","description":"Anthropic doesn’t want its AI used in autonomous weapons or government surveillance. Those carve-outs could cost it a major military contract.","url":"https://www.wired.com/story/backchannel-anthropic-dispute-with-the-pentagon/","urlToImage":"https://media.wired.com/photos/6994edaec3ca16022bd2b3d5/191:100/w_1280,c_limit/Backchannel-Anthropic-vs-Pentagon-Business--2221448096.jpg","publishedAt":"2026-02-20T17:00:00Z","content":"When Anthropic last year became the first major AI company cleared by the US government for classified useincluding military applicationsthe news didnt make a major splash. But this week a second dev… [+4161 chars]"},{"source":{"id":"wired","name":"Wired"},"author":"Aarian Marshall","title":"The Supreme Court's Tariff Ruling Won't Bring Car Prices Back to Earth","description":"Despite Friday's SCOTUS ruling, many tariffs affecting the auto industry will remain. So will the other dynamics that have led to today's historically high car prices.","url":"https://www.wired.com/story/the-supreme-courts-tariff-ruling-wont-bring-car-prices-back-to-earth/","urlToImage":"https://media.wired.com/photos/6998dd8f557d4953e6dd73fe/191:100/w_1280,c_limit/New-Car-Prices-Gear--2255530950.jpg","publishedAt":"2026-02-21T00:10:01Z","content":"It has never been more expensive to buy a new car. The average transaction price last month for buyers in the United States was $48,576, up nearly a third from 2019, according to Edmunds. The afforda… [+2231 chars]"},{"source":{"id":"wired","name":"Wired"},"author":"Kieran Alger","title":"Are Waterproof Sneakers Worth It? (2026)","description":"The idea of having warm, dry feet on your wet, snowy run is appealing. But you might not like the trade-offs.","url":"https://www.wired.com/story/waterproof-running-shoes-worth-it/","urlToImage":"https://media.wired.com/photos/698e0fccfa2d60a80c5d2e22/191:100/w_1280,c_limit/Are%20Waterproof%20Running%20Shoes%20Worth%20It_.png","publishedAt":"2026-02-13T13:00:00Z","content":"Running with wet feet, in wet socks, in wet shoes is the perfect recipe for blisters. Its also a fast track to low morale. Nothing dampens spirits quicker than soaked socks. On ultra runs, I always c… [+2246 chars]"},{"source":{"id":"wired","name":"Wired"},"author":"David Nield","title":"Google’s AI Overviews Can Scam You. Here’s How to Stay Safe","description":"Beyond mistakes or nonsense, deliberately bad information being injected into AI search summaries is leading people down potentially harmful paths.","url":"https://www.wired.com/story/googles-ai-overviews-can-scam-you-heres-how-to-stay-safe/","urlToImage":"https://media.wired.com/photos/698d20ce616dca42b2e62f59/191:100/w_1280,c_limit/gear-google-ai-2250469163.jpg","publishedAt":"2026-02-15T11:30:00Z","content":"These days, rather than showing you the traditional list of links when you run a search query, Google is intent on throwing up AI Overviews instead: synthesized summaries of information scraped off t… [+2181 chars]"},{"source":{"id":null,"name":"Barchart.com"},"author":"Neharika Jain","title":"What Are Wall Street Analysts' Target Price for Micron Technology Stock?","description":"As Micron Technology has significantly outperformed the broader market over the past year, Wall Street analysts maintain a highly optimistic outlook about...","url":"https://www.barchart.com/story/news/37276050/what-are-wall-street-analysts-target-price-for-micron-technology-stock","urlToImage":"https://s.yimg.com/os/en/barchart_com_477/7ad70eb4f0fe0219527f3dcac4789db7","publishedAt":"2026-01-28T15:30:05Z","content":"Valued at a&nbsp;market cap of $461.7 billion, Micron Technology, Inc. (MU) designs, develops, manufactures, and sells memory and storage products. The Boise, Idaho-based company&nbsp;serves the data center, P… [+1930 chars]"},{"source":{"id":"the-verge","name":"The Verge"},"author":"Allison Johnson","title":"Gemini is getting its first agentic capabilities","description":"Google's Gemini AI is getting one step closer to being more like an actual assistant. Starting with some Pixel 10 phones and the Samsung Galaxy S26 series, Gemini will be able to hail an Uber or put together a DoorDash order on its own. It's called task autom…","url":"https://www.theverge.com/tech/884210/google-gemini-samsung-s26-pixel-10-uber","urlToImage":"https://platform.theverge.com/wp-content/uploads/sites/2/2026/02/1.-Gemini-with-task-Automation.png?quality=90&amp;strip=all&amp;crop=0%2C23.821989528796%2C100%2C52.356020942408&amp;w=1200","publishedAt":"2026-02-25T17:52:08Z","content":"&lt;ul&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;/ul&gt;\r\nGeminis in the drivers seat.\r\nGeminis in the drivers seat.\r\nby\r\nAllison JohnsonClose\r\nPosts from this author will be added to your daily email digest and your ho… [+4002 chars]"},{"source":{"id":"business-insider","name":"Business Insider"},"author":"bshimkus@insider.com (Ben Shimkus)","title":"Top Anthropic executive limits his child's YouTube algorithm access: 'It freaks me out'","description":"Jack Clark, Anthropic's head of policy, joins other tech leaders who say they limit their children's screen time.","url":"https://www.businessinsider.com/anthropic-executive-childs-youtube-freaks-out-2026-2","urlToImage":"https://i.insider.com/67859b35e294a7514e8cdf2f?width=1200&amp;format=jpeg","publishedAt":"2026-02-26T10:44:01Z","content":"Jack Clark, Anthropic's head of policy, says he spends his days thinking about AI guardrails.\r\nAt home, he says he's building guardrails, too for his own kids.\r\nDuring an interview with \"The Ezra Kle… [+2270 chars]"},{"source":{"id":"wired","name":"Wired"},"author":"Lily Hay Newman, Matt Burgess, Andy Greenberg","title":"Jeffrey Epstein Had a ‘Personal Hacker,’ Informant Claims","description":"Plus: AI agent OpenClaw gives cybersecurity experts the willies, China executes 11 scam compound bosses, a $40 million crypto theft has an unexpected alleged culprit, and more.","url":"https://www.wired.com/story/security-news-this-week-jeffrey-epstein-had-a-personal-hacker-informant-claims/","urlToImage":"https://media.wired.com/photos/694af897996cb37f65fe2d98/191:100/w_1280,c_limit/1_New_Epstein_GettyImages-2252159204.jpg","publishedAt":"2026-01-31T11:30:00Z","content":"As the standoff between the United States government and Minnesota continues this week over immigration enforcement operations that have essentially occupied the Twin Cities and other parts of the st… [+4742 chars]"},{"source":{"id":null,"name":"Gizmodo.com"},"author":"Ece Yildirim","title":"Zoom Is the First Casualty in France’s War on American Big Tech","description":"Homebrewed video conferencing may not be a moonshot, but you gotta start somewhere.","url":"https://gizmodo.com/zoom-is-the-first-casualty-in-frances-war-on-american-big-tech-2000714545","urlToImage":"https://gizmodo.com/app/uploads/2026/01/macron-1200x675.jpg","publishedAt":"2026-01-27T19:35:41Z","content":"For months now, Europe has threatened action against American big tech companies in response to Trump’s trade war with the bloc. With recent escalations over the controversial American bid for Greenl… [+3201 chars]"},{"source":{"id":null,"name":"Gizmodo.com"},"author":"Mike Pearl","title":"This Video of Hilariously Slow Robots Putting Olive Oil in a Bag Is Actually Pretty Impressive","description":"Robots that can actually do things are not slick yet, and it's a relief when robotics companies don't hide from that.","url":"https://gizmodo.com/this-video-of-hilariously-slow-robots-putting-olive-oil-in-a-bag-is-actually-pretty-impressive-2000718202","urlToImage":"https://gizmodo.com/app/uploads/2026/02/Screenshot-2026-02-04-at-6.32.59-PM-e1770303817129-1200x675.jpg","publishedAt":"2026-02-05T15:35:56Z","content":"Humanoid, a UK-based robotics company, may have just created the most hypnotically slow, mind-bendingly boring video of autonomous humanoid robots performing mundane tasks since the current era of hu… [+2854 chars]"},{"source":{"id":null,"name":"Yahoo Entertainment"},"author":"ANTON L. DELGADO","title":"Photos of the latest aviation tech at the Singapore Air Show","description":"This week’s Singapore Air Show brought together trade delegations from around the world to show off the latest in civilian and military aviation technology...","url":"https://www.yahoo.com/news/articles/photos-latest-aviation-tech-singapore-045957418.html","urlToImage":"https://s.yimg.com/ny/api/res/1.2/.D1V_3YgY3WPKeWplIsKmQ--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD04MDA7Y2Y9d2VicA--/https://media.zenfs.com/en/ap.org/9bcec13e1291765c344db05262060b6b","publishedAt":"2026-02-07T04:59:57Z","content":"SINGAPORE, Singapore (AP) This weeks Singapore Air Show brought together trade delegations from around the world to show off the latest in civilian and military aviation technology.\r\nThe event this y… [+1958 chars]"},{"source":{"id":null,"name":"Yahoo Entertainment"},"author":"Parshwa Turakhiya","title":"Tom Lee: Bitcoin's 50% Drop Is A 'Crypto Squall,' Not A Winter","description":"Fundstrat’s Tom Lee called Bitcoin’s (CRYPTO: BTC) 50% drawdown a “crypto squall” rather than a structural collapse, arguing technology and crypto sectors...","url":"https://finance.yahoo.com/news/tom-lee-bitcoins-50-drop-230109686.html","urlToImage":"https://s.yimg.com/os/en/benzinga_79/709e607e8795bbcb05dbc8c2ff6f9267","publishedAt":"2026-02-24T23:01:09Z","content":"Benzinga and Yahoo Finance LLC may earn commission or revenue on some items through the links below.\r\nFundstrats Tom Lee called Bitcoins(CRYPTO: BTC) 50% drawdown a crypto squall rather than a struct… [+12662 chars]"},{"source":{"id":null,"name":"Yahoo Entertainment"},"author":"Yahoo Finance Video","title":"Tesla is still a 'long way off' from functional humanoid robots","description":"Elon Musk has a tremendous vision for robotics and the mass adoption of this kind of technology. Gerber Kawasaki Wealth &amp; Investment Management CEO Ross...","url":"https://finance.yahoo.com/video/tesla-still-long-way-off-223500625.html","urlToImage":"https://s.yimg.com/ny/api/res/1.2/meBBknq3oWvy7VzMTxje9g--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD02NzY-/https://s.yimg.com/os/creatr-uploaded-images/2026-02/6094ce30-0929-11f1-befe-81aff0611f95","publishedAt":"2026-02-13T22:35:00Z","content":"Ross, it is great to see you as always. So listen, Elon Musk has made it clear Ross, the future for his company, it's an army of humanoid robots. Uh robots from all kinds of work, right? They're goin… [+5314 chars]"},{"source":{"id":null,"name":"Yahoo Entertainment"},"author":"RODRIQUE NGOWI and PATRICK WHITTLE","title":"Authorities are using deep-sea tech to try find the sunken fishing boat off Massachusetts","description":"A coalition of authorities is deploying technology to try to locate the wreck of a fishing boat that sank last month off Massachusetts, killing all seven...","url":"https://www.yahoo.com/news/articles/authorities-using-deep-sea-tech-200417637.html","urlToImage":"https://s.yimg.com/ny/api/res/1.2/2Ob6bzTZjZaiBacfF1Q3fw--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD04MDA7Y2Y9d2VicA--/https://media.zenfs.com/en/ap.org/b06178a09960ef6a7f53b6b437a13f66","publishedAt":"2026-02-18T20:04:17Z","content":"GLOUCESTER, Mass. (AP) A coalition of authorities is deploying technology to try to locate the wreck of a fishing boat that sank last month off Massachusetts, killing all seven aboard. But winter wea… [+3077 chars]"},{"source":{"id":null,"name":"SlashGear"},"author":"Jonathan H. Kantor","title":"This New Marine Drone Looks Like A Killer Whale, But Is Much Deadlier","description":"New developments in drone technology have led to increased capabilities on land, air, sea — including a new prototype that mimics a marine animal.","url":"https://www.slashgear.com/2105228/deadly-drone-sea-predator-7-looks-like-killer-whale/","urlToImage":"https://s.yimg.com/ny/api/res/1.2/q33LWgev84rUJl35yx200Q--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD02NzQ7Y2Y9d2VicA--/https://media.zenfs.com/en/slash_gear_112/e749b42b84e369f07aa8731a7ad08b36","publishedAt":"2026-02-24T09:30:00Z","content":"While most people think of aircraft like the fast-moving MQ-1 Predator when they hear the words \"military drone,\" that's not the only option. These days, drones can fly, as well as swim or travel ove… [+3426 chars]"},{"source":{"id":null,"name":"Yahoo Entertainment"},"author":"Reuters","title":"Exclusive-Micron to announce memory chip manufacturing investment in Singapore, sources say","description":"U.S. memory chip maker Micron Technology is set to announce new memory chip manufacturing capacity investment ​in Singapore, three people briefed on the...","url":"https://finance.yahoo.com/news/exclusive-micron-announce-memory-chip-014449373.html","urlToImage":"https://s.yimg.com/os/en/reuters-finance.com/350263b50f40a78920f84a77f3e3c1b4","publishedAt":"2026-01-27T01:44:49Z","content":"Jan 27 (Reuters) - U.S. memory chip maker Micron Technology is set to announce new memory chip manufacturing capacity investment in Singapore, three people briefed on the matter said, expanding produ… [+1485 chars]"}]}</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">source</th>
+<th data-quarto-table-cell-role="th">title</th>
+<th data-quarto-table-cell-role="th">author</th>
+<th data-quarto-table-cell-role="th">time published</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Wired</td>
+<td>Leading US Research Lab Appears to Be Squeezin...</td>
+<td>Paresh Dave</td>
+<td>2026-02-20T10:00:00Z</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>Gizmodo.com</td>
+<td>Why Cops Frequently Got Caught Planting Drugs ...</td>
+<td>Matt Novak</td>
+<td>2026-02-05T21:10:32Z</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>Wired</td>
+<td>The Shoes and Brooms Transforming Curling at t...</td>
+<td>Alessio Caprodossi</td>
+<td>2026-02-08T12:00:00Z</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>Wired</td>
+<td>How Mexico's ‘CJNG’ Drug Cartel Embraced AI, D...</td>
+<td>Fernanda González</td>
+<td>2026-02-25T09:30:00Z</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>Gizmodo.com</td>
+<td>Palantir Touts $2 Billion in Revenue from Aidi...</td>
+<td>Ece Yildirim</td>
+<td>2026-02-03T01:23:13Z</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">...</th>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">75</th>
+<td>Yahoo Entertainment</td>
+<td>Tom Lee: Bitcoin's 50% Drop Is A 'Crypto Squal...</td>
+<td>Parshwa Turakhiya</td>
+<td>2026-02-24T23:01:09Z</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">76</th>
+<td>Yahoo Entertainment</td>
+<td>Tesla is still a 'long way off' from functiona...</td>
+<td>Yahoo Finance Video</td>
+<td>2026-02-13T22:35:00Z</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">77</th>
+<td>Yahoo Entertainment</td>
+<td>Authorities are using deep-sea tech to try fin...</td>
+<td>RODRIQUE NGOWI and PATRICK WHITTLE</td>
+<td>2026-02-18T20:04:17Z</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">78</th>
+<td>SlashGear</td>
+<td>This New Marine Drone Looks Like A Killer Whal...</td>
+<td>Jonathan H. Kantor</td>
+<td>2026-02-24T09:30:00Z</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">79</th>
+<td>Yahoo Entertainment</td>
+<td>Exclusive-Micron to announce memory chip manuf...</td>
+<td>Reuters</td>
+<td>2026-01-27T01:44:49Z</td>
+</tr>
+</tbody>
+</table>
+
+<p>80 rows × 4 columns</p>
+</div>
+</div>
+</div>
+<div id="18a3fe2a" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"mention_ai"</span>] <span class="op">=</span> df[<span class="st">"title"</span>].<span class="bu">str</span>.contains(<span class="st">"AI"</span>, case<span class="op">=</span><span class="va">False</span>, na<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>ai_counts <span class="op">=</span> (</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">"mention_ai"</span>]</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    .value_counts()</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    .reset_index()</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>ai_counts.columns <span class="op">=</span> [<span class="st">"mention_ai"</span>, <span class="st">"article_count"</span>]</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>ai_counts</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>plt.bar(</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"Mentions AI"</span>, <span class="st">"Does Not Mention AI"</span>],</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    ai_counts[<span class="st">"article_count"</span>]</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Number of Articles"</span>)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Tech News Articles with 'AI'"</span>)</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="README_files/figure-html/cell-3-output-1.png" width="585" height="431" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="d43dc1cc" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>source_count <span class="op">=</span> (</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    df.groupby(<span class="st">"source"</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    .size()</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    .reset_index(name <span class="op">=</span> <span class="st">"article_count"</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    .sort_values(<span class="st">"article_count"</span>, ascending <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    .head(<span class="dv">5</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>plt.bar(source_count[<span class="st">"source"</span>], source_count[<span class="st">"article_count"</span>])</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"News Source"</span>)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Number of Articles"</span>)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Top Sources Publishing Tech News"</span>)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="README_files/figure-html/cell-4-output-1.png" width="604" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="62bc044f" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"time published"</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">"time published"</span>])</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"date"</span>] <span class="op">=</span> df[<span class="st">"time published"</span>].dt.date</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>ai_df <span class="op">=</span> df[df[<span class="st">"mention_ai"</span>]]</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>articles_by_time <span class="op">=</span> (</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    ai_df.groupby(<span class="st">"date"</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    .size()</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    .reset_index(name <span class="op">=</span> <span class="st">"article_count"</span>)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>articles_by_time.head()</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>plt.plot(articles_by_time[<span class="st">"date"</span>], articles_by_time[<span class="st">"article_count"</span>])</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Date"</span>)</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Number of Articles"</span>)</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"AI related Technology News Publsihed Over Time"</span>)</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="README_files/figure-html/cell-5-output-1.png" width="606" height="500" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Visualizations: 1 Three Visualizations using matplotlib:</p>
+<p>Technology News Published Over Time (2026) A line chart shows the article counts aggregate by month to highlight overall publication trends of AI. Since the Super Bowl in early February, there is a noticeable increase in AI Articles being produced.</p>
+<p>2 Top Sources Publishing AI Articles</p>
+<p>I was surprised with my findings in this visual because there were a lot of sources that I had not heard of before. Some of the more prominent names such as Yahoo Entertainment, had significantly less postings than Wired and Gimzodo.com.</p>
+<p>3 AI Mentions vs Non-AI headlines</p>
+<p>This was the most interesting result because the visual showed major differences in favor of AI related headlines. This visual only encompasses articles published in 2026.</p>
+<p>Conclusion:</p>
+<p>This analysis encompasses notable media and news outlets in 2026. My project shows that technology news is published frequently, contributing to the trend that technology remains a vocal point in modern media. This project concludes the main focus of this technology oriented news is artificial intelligence. While AI does not dominate all technology reporting, its frequent appearance in artificial titles indicate the direction is trending upward, as it is increasingly being mentioned.</p>
+<p>Overall, the findings indicate that API-based data proves that there is a steady increase in AI-oriented media articles since the Superbowl. Based on the analysis, this trend looks like it will continue.</p>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
