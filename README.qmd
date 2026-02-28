@@ -1,0 +1,162 @@
+---
+author: Patrick Hourihan 
+title: "Untitled"
+format: html
+---
+
+
+
+
+Overview:
+
+After watching the superbowl this year, I had a few takeaways. First, as a Patriots fan, this is going to be a sad offseason. Second, the commercials featured a lot of AI content. These initial impressions of the superbowl commercials ignited a deeper curiosity, which is the motivation for my project. This project analyzes recent technology-related news articles to understand how often tech related news has the words “AI”. 
+
+Using data collected from the source NewsAPI, this project uses a small data pipeline that retrieves article data, cleans, and visualizes it for the audience. The contents produced contain AI usage in recent publications online. 
+
+Problem Framing: 
+This project focuses on three main areas:
+How frequently is technology news published over the past few weeks?
+How often does the words artificial intelligence appear in technology news headlines
+Which news sources produce the most
+
+Data Preparation:
+
+Collected from NewsAPI, which returns news article information in a raw JSON. Only the fields needed for the analysis were kept. Each article was reduced to its source, title, publication time, and author. I wanted to keep the dataset relevant to my project prompt. Next, the publication time was cleaned by converting it from a text string into a data and time format. By doing this, I could group articles by day or month and compare how often technology news was published over time. Finally, article tiles were examined for the “AI”. 
+
+
+
+
+```{python}
+import requests
+import pandas as pd
+import seaborn as sns
+import time
+import matplotlib.pyplot as plt
+
+
+
+
+api_key = "2561a12ad67349d9ad09f32243966cc2"
+
+topic = "technology"
+
+url=f"https://newsapi.org/v2/everything?q={topic}&apiKey={api_key}"
+response = requests.get(url)
+print(response.text)
+
+data = response.json()
+
+rows = []
+
+for item in data["articles"]:
+    rows.append({
+        "source": item["source"]["name"],
+        "title": item["title"],
+        "author": item["author"],
+        "time published": item["publishedAt"]
+    })
+df = pd.DataFrame(rows)
+df
+
+
+
+
+```
+
+```{python}
+
+df["mention_ai"] = df["title"].str.contains("AI", case=False, na=False)
+
+ai_counts = (
+    df["mention_ai"]
+    .value_counts()
+    .reset_index()
+)
+ai_counts.columns = ["mention_ai", "article_count"]
+
+ai_counts
+
+plt.figure()
+plt.bar(
+    ["Mentions AI", "Does Not Mention AI"],
+    ai_counts["article_count"]
+)
+plt.ylabel("Number of Articles")
+plt.title("Tech News Articles with 'AI'")
+plt.show()
+
+
+```
+
+```{python}
+
+source_count = (
+    df.groupby("source")
+    .size()
+    .reset_index(name = "article_count")
+    .sort_values("article_count", ascending = False)
+    .head(5)
+)
+
+plt.figure()
+plt.bar(source_count["source"], source_count["article_count"])
+plt.xlabel("News Source")
+plt.ylabel("Number of Articles")
+plt.title("Top Sources Publishing Tech News")
+plt.show()
+
+
+```
+
+```{python}
+
+df["time published"] = pd.to_datetime(df["time published"])
+
+df["date"] = df["time published"].dt.date
+
+ai_df = df[df["mention_ai"]]
+
+articles_by_time = (
+    ai_df.groupby("date")
+    .size()
+    .reset_index(name = "article_count")
+)
+
+articles_by_time.head()
+
+
+plt.figure()
+plt.plot(articles_by_time["date"], articles_by_time["article_count"])
+plt.xlabel("Date")
+plt.ylabel("Number of Articles")
+plt.title("AI related Technology News Publsihed Over Time")
+plt.xticks(rotation=45)
+plt.show()
+
+
+
+
+
+```
+
+
+Visualizations: 
+1 Three Visualizations using matplotlib:
+
+Technology News Published Over Time (2026)
+A line chart shows the article counts aggregate by month to highlight overall publication trends of AI. Since the Super Bowl in early February, there is a noticeable increase in AI Articles being produced.
+
+2 Top Sources Publishing AI Articles 
+
+I was surprised with my findings in this visual because there were a lot of sources that I had not heard of before. Some of the more prominent names such as Yahoo Entertainment, had significantly less postings than Wired and Gimzodo.com. 
+
+3 AI Mentions vs Non-AI headlines
+
+This was the most interesting result because the visual showed major differences in favor of AI related headlines. This visual only encompasses articles published in 2026. 
+
+
+Conclusion:
+
+This analysis encompasses notable media and news outlets in 2026. My project shows that technology news is published frequently, contributing to the trend that technology remains a vocal point in modern media. This project concludes the main focus of this technology oriented news is artificial intelligence. While AI does not dominate all technology reporting, its frequent appearance in artificial titles indicate the direction is trending upward, as it is increasingly being mentioned. 
+
+Overall, the findings indicate that API-based data proves that there is a steady increase in AI-oriented media articles since the Superbowl. Based on the analysis, this trend looks like it will continue. 
